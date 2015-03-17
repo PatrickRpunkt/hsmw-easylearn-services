@@ -320,22 +320,17 @@ public class CardStackEndpoint {
 
 
     /**
-     * Fetches all existing cardstacks.
+     * Creates sample Data.
      *
-     * @return 404 NOT FOUND if no cardstacks exist.
+     * @return 201 CREATED if all data created.
      */
     @GET
     @Path("sampledata")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public Response dummy() {
-        CardStack cardStack = _serviceContext.createSampleData();
-
-        // creation failed, return 400
-        if (cardStack == null)
-            return Response.status(Response.Status.BAD_REQUEST).build();
-
+        _serviceContext.createSampleData();
         // success, return 201 and the cardstack object
-        return Response.status(Response.Status.CREATED).entity(cardStack).build();
+        return Response.status(Response.Status.CREATED).build();
     }
 
 }
